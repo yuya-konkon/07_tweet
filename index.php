@@ -64,9 +64,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           <a href="show.php"><?php echo h($tweet['content']); ?><br></a>
           投稿日時:<?php echo h($tweet['created_at']); ?>
           <?php if ($tweet['good'] == 0) : ?>
-            <a href="good.php?id=<?php echo h($tweet['id']) . " &good=1"; ?>" class="good-list"><?php echo '☆'; ?></a>
+            <a href="good.php?id=<?php echo h($tweet['id']) . " &good=0"; ?>" class="good-list"><?php echo '☆'; ?></a>
           <?php else : ?>
-            <a href="good.php?id=<?php echo h($tweet['id']) . " &good=0"; ?>" class="good-list"><?php echo '★'; ?></a>
+            <a href="good.php?id=<?php echo h($tweet['id']) . " &good=1"; ?>" class="good-list"><?php echo '★'; ?></a>
           <?php endif; ?>
           <hr>
         </li>

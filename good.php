@@ -10,10 +10,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
   $good = $_GET['good'];
   if ($good == "1") {
     $good_value = 1;
-    echo '1';
+    $sql = "update tweets set good = 2 where id = :id";
   } else {
     $good_value = 0;
-    echo '0';
+    $sql = "update tweets set good = 1 where id = :id";
   }
 
   $stmt = $dbh->prepare($sql);
@@ -22,6 +22,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
   $tweets = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 
-  // header('Location: index.php');
-  // exit;
+  header('Location: index.php');
+  exit;
 }
