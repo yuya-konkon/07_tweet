@@ -5,6 +5,7 @@ require_once('functions.php');
 
 $dbh = connectDb();
 
+
 // ツイート一覧の表示
 $sql = "select * from tweets order by created_at desc";
 $stmt = $dbh->prepare($sql);
@@ -61,7 +62,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <ul class="tweet-list">
       <?php foreach ($tweets as $tweet) : ?>
         <li>
-          <a href="show.php"><?php echo h($tweet['content']); ?><br></a>
+          <a href="show.php?id=<?php echo h($tweet['id']) ?>"><?php echo h($tweet['content']); ?><br></a>
           投稿日時:<?php echo h($tweet['created_at']); ?>
           <?php if ($tweet['good'] == 0) : ?>
             <a href="good.php?id=<?php echo h($tweet['id']) . " &good=0"; ?>" class="good-list"><?php echo '☆'; ?></a>
@@ -72,6 +73,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </li>
       <?php endforeach; ?>
     </ul>
+  <?php else : ?>
+    <p>投稿されたtweetはありません</p>
   <?php endif; ?>
 </body>
 
