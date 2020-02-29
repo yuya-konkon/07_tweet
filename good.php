@@ -7,6 +7,7 @@ $dbh = connectDb();
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
   // フォームに入力されたデータの受け取り
+  $id = $_GET['id'];
   $good = $_GET['good'];
   if ($good == "1") {
     $good_value = 1;
