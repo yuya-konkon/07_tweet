@@ -12,3 +12,7 @@
   text-decoration: none;
   color: red;
 }
+
+.show-list li {
+  list-style: none;
+}

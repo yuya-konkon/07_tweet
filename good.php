@@ -22,7 +22,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
   $stmt->execute();
   $tweets = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-
   header('Location: index.php');
   exit;
 }
