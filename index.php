@@ -22,6 +22,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   }
 
   if (empty($error)) {
+    // insert文
+    $sql = "insert into tweets (content, created_at) values (:content, now())";
+    $stmt = $dbh->prepare($sql);
+    $stmt->bindParam(":content", $cnotent);
+    $stmt->execute();
+
+    header('Location: index.php');
+    exit;
   }
 }
 
@@ -50,7 +58,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <?php endif; ?>
 
   <!-- 新規ツイートフォーム -->
-  <form action="" method="post">
+  <form action="" method="POST">
     <label for="content">ツイート内容</label><br>
     <textarea name="content" id="" cols="30" rows="5" placeholder="いまどうしてる？"></textarea><br>
     <input type="submit" value="投稿">
