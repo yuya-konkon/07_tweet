@@ -14,7 +14,6 @@ $tweets = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $content = $_POST['content'];
-
   $error = [];
 
   if ($content == '') {

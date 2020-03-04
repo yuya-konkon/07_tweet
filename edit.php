@@ -21,18 +21,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   $errors = [];
   
   // $contentの中身がなにもない状態になってしまっている
-  var_dump($content);
   if ($content == '') {
     $errors['content'] = '本文を入力してください。';
   }
 
-  if($content = $tweet['content']) {
+  if($content == $tweet['content']) {
     $errors['content'] = '本文が変更されていません。';
   }
 
   if(empty($errors)) {
     $dbh = connectDb();
-    $sql = "update tweets set content = :content, created_at = now() where id = ;id";
+    $sql = "update tweets set content = :content, created_at = now() where id = :id";
     $stmt = $dbh->prepare($sql);
     $stmt->bindParam(":id", $id);
     $stmt->bindParam(":content", $content);
@@ -68,7 +67,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     </ul>
   <?php endif; ?>
   <form action="" method="post">
-    <p><label for="content">本文</label></p>
+    <label for="content">本文</label><br>
     <textarea name="content" cols="30" rows="5"><?php echo h($tweet['content']);?></textarea>
     <p><input type="submit" value="編集"></p>
   </form>

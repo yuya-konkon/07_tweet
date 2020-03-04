@@ -2,6 +2,7 @@
 
 .error-list li {
   color: red;
+  list-style: none;
 }
 
 .tweet-list li {
