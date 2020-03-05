@@ -5,6 +5,7 @@ require_once('functions.php');
 
 $dbh = connectDb();
 
+
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
   // フォームに入力されたデータの受け取り
   $id = $_GET['id'];
@@ -22,7 +23,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
   $stmt->execute();
   $tweets = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-  header('Location: index.php');
-  exit;
-  // showから来たときは、showに戻す
+  $moto = $_SERVER[HTTP_REFERER];
+  $moto_str = array(
+    'yahoo.co.jp',
+    'yahoo.com'
+  );
+  $count = count($moto_str);
+  for ($i = 0; $i < $count; $i++) {
+    if (stristr($moto, $moto_str[$i])) {
+      $yes = 1;
+    }
+    if ($yes) {
+      break;
+    }
+  }
+  if ($yes) {
+    header("Location: http://あなたのURL/1.html");
+  } else {
+    header("Location: http://あなたのURL/2.html");
+  }
+
+  if ($url == 'index.php') {
+    header('Location: index.php');
+    exit;
+  } else {
+    header('Location: show.php');
+    exit;
+  }
 }
