@@ -23,15 +23,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
   $stmt->execute();
   $tweets = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-  $referer = $_SERVER['HTTP_REFERER'];
-  $url = parse_url($referer);
-  $host = $url['host'];
-
-  if ($host == 'index.php') {
-    header('Location: index.php');
-    exit;
-  } else {
-    header('Location: show.php');
-    exit;
-  }
+  $url = $_SERVER['HTTP_REFERER'];
+  header('Location: '. $url);
 }
