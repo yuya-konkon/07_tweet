@@ -23,27 +23,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
   $stmt->execute();
   $tweets = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-  $moto = $_SERVER[HTTP_REFERER];
-  $moto_str = array(
-    'yahoo.co.jp',
-    'yahoo.com'
-  );
-  $count = count($moto_str);
-  for ($i = 0; $i < $count; $i++) {
-    if (stristr($moto, $moto_str[$i])) {
-      $yes = 1;
-    }
-    if ($yes) {
-      break;
-    }
-  }
-  if ($yes) {
-    header("Location: http://あなたのURL/1.html");
-  } else {
-    header("Location: http://あなたのURL/2.html");
-  }
+  $referer = $_SERVER['HTTP_REFERER'];
+  $url = parse_url($referer);
+  $host = $url['host'];
 
-  if ($url == 'index.php') {
+  if ($host == 'index.php') {
     header('Location: index.php');
     exit;
   } else {
