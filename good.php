@@ -5,6 +5,7 @@ require_once('functions.php');
 
 $dbh = connectDb();
 
+
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
   // フォームに入力されたデータの受け取り
   $id = $_GET['id'];
@@ -22,6 +23,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
   $stmt->execute();
   $tweets = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-  header('Location: index.php');
-  exit;
+  $url = $_SERVER['HTTP_REFERER'];
+  header('Location: '. $url);
 }
